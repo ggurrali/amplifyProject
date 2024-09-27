@@ -22,6 +22,30 @@ const schema = a.schema({
         downs: a.integer(),
         version: a.integer(),
     }),
+
+    getPost: a
+        .query()
+        .arguments({ id: a.id().required() })
+        .returns(a.ref("RaspberryPi_data_table"))
+        .authorization(allow => [allow.publicApiKey()])
+        .handler(
+            a.handler.custom({
+                dataSource: "ExternalRaspberryPi_data_tableSource",
+                entry: "./getRaspberryPi_data_table.js",
+            })
+        ),
+
+    deletePost: a
+        .mutation()
+        .arguments({ id: a.id().required(), expectedVersion: a.integer() })
+        .returns(a.ref("RaspberryPi_data_table"))
+        .authorization(allow => [allow.publicApiKey()])
+        .handler(
+            a.handler.custom({
+                dataSource: "ExternalRaspberryPi_data_tableSource",
+                entry: "./deleteRaspberryPi_data_table.js",
+            })
+        ),
 });
 
 export type Schema = ClientSchema<typeof schema>;

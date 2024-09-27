@@ -8,4 +8,15 @@ export const backend = defineBackend({
   data,
 });
 
+const externalDataSourcesStack = backend.createStack("MyExternalDataSources");
 
+const externalTable = aws_dynamodb.Table.fromTableName(
+    externalDataSourcesStack,
+    "MyExternalRaspberryPi_data_table",
+    "RaspberryPi_data_table"
+);
+
+backend.data.addDynamoDbDataSource(
+    "ExternalRaspberryPi_data_tableSource",
+    externalTable
+);
