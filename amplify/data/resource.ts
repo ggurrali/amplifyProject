@@ -7,7 +7,7 @@ const schema = a.schema({
         })
         .authorization((allow) => [allow.publicApiKey()]),
 
-    RaspberryPi_data_table: a.model({
+    RaspberryPiDataTable: a.model({
         idDevice: a.id().required(),
     }).identifier(["idDevice"]).authorization((allow) => [allow.publicApiKey()]),
 
