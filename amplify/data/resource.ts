@@ -12,8 +12,9 @@ const schema = a.schema({
             content: a.string(),
         })
         .authorization((allow) => [allow.publicApiKey()]),
+
     RaspberryPi_data_table: a.customType({
-        id: a.id().required(),
+        idDevice: a.id().required(),
         author: a.string().required(),
         title: a.string(),
         content: a.string(),
@@ -23,7 +24,7 @@ const schema = a.schema({
         version: a.integer(),
     }),
 
-    getPost: a
+    getRaspberryPi_data_table: a
         .query()
         .arguments({ id: a.id().required() })
         .returns(a.ref("RaspberryPi_data_table"))
@@ -35,7 +36,7 @@ const schema = a.schema({
             })
         ),
 
-    deletePost: a
+    deleteRaspberryPi_data_table: a
         .mutation()
         .arguments({ id: a.id().required(), expectedVersion: a.integer() })
         .returns(a.ref("RaspberryPi_data_table"))

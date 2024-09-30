@@ -4,8 +4,12 @@ import type { Schema } from "@/amplify/data/resource";
 
 const client = generateClient<Schema>();
 
-export default function App() {
+export default async function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+
+  const {data, errors} = await client.mutations.deleteRaspberryPi_data_table({
+    id: "<post-id>"
+  })
 
   function listTodos() {
     client.models.Todo.observeQuery().subscribe({
@@ -24,8 +28,8 @@ export default function App() {
   }
 
   return (
-    <main>
-      <h1>CIAO</h1>
-    </main>
+      <main>
+        <h1>CIAO</h1>
+      </main>
   );
 }
