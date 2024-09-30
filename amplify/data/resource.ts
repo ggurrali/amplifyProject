@@ -26,7 +26,7 @@ const schema = a.schema({
 
     getRaspberryPi_data_table: a
         .query()
-        .arguments({ id: a.id().required() })
+        .arguments({ idDevice: a.id().required() })
         .returns(a.ref("RaspberryPi_data_table"))
         .authorization(allow => [allow.publicApiKey()])
         .handler(
@@ -38,7 +38,7 @@ const schema = a.schema({
 
     deleteRaspberryPi_data_table: a
         .mutation()
-        .arguments({ id: a.id().required(), expectedVersion: a.integer() })
+        .arguments({ idDevice: a.id().required(), expectedVersion: a.integer() })
         .returns(a.ref("RaspberryPi_data_table"))
         .authorization(allow => [allow.publicApiKey()])
         .handler(
